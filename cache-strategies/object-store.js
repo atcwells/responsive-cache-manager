@@ -1,4 +1,6 @@
 var _ = require('lodash-node');
+var default_object = require('../cache-object-types/default_object.js');
+var config_file = require('../cache-object-types/config_file.js');
 
 module.exports = function init() {
 	return new cache_object_store();
@@ -6,6 +8,7 @@ module.exports = function init() {
 
 var cache_object_store = function cache_object_store() {
     this._cacheObject = {};
+    this._objectDirectory = {};
     return this;
 };
 
@@ -16,12 +19,8 @@ cache_object_store.prototype.flush = function flush() {
 
 cache_object_store.prototype.set = function set(object, relativeObject, path) {
     var self = this;
-    if (!path) {
-        var path = "$cache:";
-    }
-    if (!relativeObject) {
-        var relativeObject = self._cacheObject;
-    }
+  	var path = path || "$cache:";
+    var relativeObject = relativeObject || self._cacheObject;
 
     for (var key in object) {
         if (_.isString(object[key]) || _.isFunction(object[key])) {
@@ -37,6 +36,7 @@ cache_object_store.prototype.set = function set(object, relativeObject, path) {
             } else {
                 self.logger.debug('Writing ' + path + key + ' with value: ' + debugLine);
             }
+            this._objectDirectory[path + key] = default_object();
             relativeObject[key] = object[key];
         } else {
             if (_.isArray(object[key])) {
@@ -76,10 +76,16 @@ cache_object_store.prototype.getAll = function getAll() {
     return this._cacheObject;
 };
 
+cache_object_store.prototype.getStats = function getStats() {
+    this.logger.debug('All Cache stats returned');
+    return this._objectDirectory;
+};
+
 cache_object_store.prototype.get = function get(key) {
     var segments = key.split('.');
     var cacheObject = undefined;
     var self = this;
+		self._objectDirectory["$cache:" + key].reads++;
     segments.forEach(function(key) {
         if (!cacheObject) {
             cacheObject = self._cacheObject[key];

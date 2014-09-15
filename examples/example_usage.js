@@ -1,10 +1,15 @@
 var RCI = require('../responsive-cache-interface.js')();
 
 RCI.set({
-	foo: 'bar'
+	foo: 'bar',
+	bar: {
+		yes : 'no'
+	}
 });
 
 console.log(RCI.getAll());
 console.log(RCI.get('foo'));
 
-RCI.flush();
+console.log(RCI.getStats());
+
+// RCI.flush();

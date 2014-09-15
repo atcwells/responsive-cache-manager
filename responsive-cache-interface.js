@@ -41,3 +41,7 @@ cache_manager.prototype.getAll = function getAll() {
 cache_manager.prototype.get = function get(group, key) {
     return this._cache.get(group, key);
 };
+
+cache_manager.prototype.getStats = function get(group, key) {
+    return this._cache.getStats(group, key);
+};
