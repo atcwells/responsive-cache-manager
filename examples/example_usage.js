@@ -1,4 +1,4 @@
-var RCI = require('../responsive-cache-interface.js')();
+var RCI = require('../responsive-cache-manager.js')();
 
 RCI.set({
 	foo: 'bar',

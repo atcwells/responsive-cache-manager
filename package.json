@@ -1,8 +1,8 @@
 {
-  "name": "responsive-cache-interface",
+  "name": "responsive-cache-manager",
   "version": "0.0.2",
   "description": "A dynamic caching interface",
-  "main": "responsive-cache-interface.js",
+  "main": "responsive-cache-manager.js",
   "directories": {
     "example": "examples"
   },
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/atcwells/responsive-cache-interface.git"
+    "url": "https://github.com/atcwells/responsive-cache-manager.git"
   },
   "keywords": [
     "cache",
@@ -24,7 +24,7 @@
   "author": "Alex Wells",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/atcwells/responsive-cache-interface/issues"
+    "url": "https://github.com/atcwells/responsive-cache-manager/issues"
   },
-  "homepage": "https://github.com/atcwells/responsive-cache-interface"
+  "homepage": "https://github.com/atcwells/responsive-cache-manager"
 }
