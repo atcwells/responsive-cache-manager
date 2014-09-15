@@ -20,6 +20,7 @@ cache_manager.prototype.setup = function setup(cacheStore) {
     this.logger.info('Using Caching Strategy: ' + this.cacheStrategy);
     this._cache = require(this.cacheStrategy)();
     this._cache.logger = this.logger;
+    return this;
 };
 
 cache_manager.prototype.flush = function flush() {
