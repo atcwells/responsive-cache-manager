@@ -1,6 +1,6 @@
 {
   "name": "responsive-cache-manager",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A dynamic caching interface",
   "main": "responsive-cache-manager.js",
   "directories": {

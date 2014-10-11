@@ -4,23 +4,21 @@ module.exports = function init(options) {
 
 function cache_manager(optionsObj) {
     var options = optionsObj || {};
+
     this.logger = {
         debug : (options.logger && options.logger.debug) || console.log,
         info : (options.logger && options.logger.info) || console.log,
         warn : (options.logger && options.logger.war) || console.log,
         error : (options.logger && options.logger.error) || console.log
     };
+
     this.cacheStrategy = (options.cacheStrategy) ? './cache-strategies/' + options.cacheStrategy : './cache-strategies/object-store';
-    this._cache = {};
-    this.setup();
-    return this;
+		this.logger.info('Using Caching Strategy: ' + this.cacheStrategy);
+		this._cache = require(this.cacheStrategy)(options);
 };
 
 cache_manager.prototype.setup = function setup(cacheStore) {
-    this.logger.info('Using Caching Strategy: ' + this.cacheStrategy);
-    this._cache = require(this.cacheStrategy)();
     this._cache.logger = this.logger;
-    return this;
 };
 
 cache_manager.prototype.flush = function flush() {
