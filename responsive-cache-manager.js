@@ -1,8 +1,8 @@
-module.exports = function init(options) {
-	return new cache_manager(options);
+module.exports = function init(options, callback) {
+	return new cache_manager(options, callback);
 };
 
-function cache_manager(optionsObj) {
+function cache_manager(optionsObj, callback) {
     var options = optionsObj || {};
 
     this.logger = {
@@ -14,7 +14,7 @@ function cache_manager(optionsObj) {
 
     this.cacheStrategy = (options.cacheStrategy) ? './cache-strategies/' + options.cacheStrategy : './cache-strategies/object-store';
 		this.logger.info('Using Caching Strategy: ' + this.cacheStrategy);
-		this._cache = require(this.cacheStrategy)(options);
+		this._cache = require(this.cacheStrategy)(options, callback);
 };
 
 cache_manager.prototype.setup = function setup(cacheStore) {

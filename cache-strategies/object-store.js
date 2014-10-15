@@ -2,11 +2,11 @@ var _ = require('lodash-node');
 var default_object = require('../cache-object-types/default_object.js');
 var config_file = require('../cache-object-types/config_file.js');
 
-module.exports = function init(options) {
-	return new cache_object_store(options);
+module.exports = function init(options, callback) {
+	return new cache_object_store(options, callback);
 };
 
-var cache_object_store = function cache_object_store(options) {
+var cache_object_store = function cache_object_store(options, callback) {
 		this.options = options || {};
 
 		this.logger = {
@@ -18,6 +18,7 @@ var cache_object_store = function cache_object_store(options) {
 
     this._cacheObject = {};
     this._objectDirectory = {};
+		callback(null, "Cache Object Store setup complete");
 };
 
 cache_object_store.prototype.flush = function flush() {
